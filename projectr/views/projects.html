@@ -1,0 +1,54 @@
+<!-- Page that lists all available projects -->
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row">
+  <div class="col s8">
+    <div class="row card-panel blue lighten-4 z-depth-3">
+        <h5 class="col s2">Projects</h5>
+    </div>
+
+    <div class="row">
+        <div class="col s8 offset-s2">
+          <div class="input-field col s12">
+            <input id="search_text" type="text">
+            <label for="search_text">Search</label>
+          </div>
+          <div class="right-align"><a class="waves-effect eaves-light btn" onclick="Materialize.showStaggeredList('#list-test')">Search</a></div>
+        </div>
+    </div>
+
+    <div class="row">
+      <ul class="collapsible popout col s12" data-collapsible="accordion" id="list-test">
+          {% for project in projects %}
+          <li>
+            <div class="collapsible-header"> {{ project.name }}</div>
+            <div class="collapsible-body white">
+              <p> {{ project.description }}</p>
+              <div class="row">
+                <div class="col s7 offset-s1">
+                    <a href="/project/{{ project.id }}" class="waves-effect eaves-light btn col s4">View More</a>
+                </div>
+              </div>
+            </div>
+          </li>
+          {% endfor %}
+      </ul>
+    </div>
+
+    <div class="row">
+      <ul class="pagination col s8 offset-s4">
+        <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+        <li class="active dark grey"><a href="#!">1</a></li>
+        <li class="waves-effect"><a href="#!">2</a></li>
+        <li class="waves-effect"><a href="#!">3</a></li>
+        <li class="waves-effect"><a href="#!">4</a></li>
+        <li class="waves-effect"><a href="#!">5</a></li>
+        <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+{% endblock content %}

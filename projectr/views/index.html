@@ -1,0 +1,20 @@
+<!-- The home splash page where users can login and register -->
+{% extends "base.html" %}
+{% block content %}
+
+<div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+        <br><br>
+        <h1 class="header center orange-text">Projectr</h1>
+        <div class="row center">
+            <h5 class="header col s12 light">A Project finding tool for the 21st Century</h5>
+        </div>
+        <div class="row center">
+            <a href="/login" id="download-button" class="btn-large waves-effect waves-light orange">Login</a>
+            <a href="/register" id="download-button" class="btn-large waves-effect waves-light orange">Register</a>
+        </div>
+        <br><br>
+    </div>
+</div>
+
+{% endblock content %}

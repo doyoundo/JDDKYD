@@ -1,0 +1,40 @@
+<!-- Page for sending new messages ->
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row">
+    <!-- Submit a message form -->
+    <form class="col s12" action="/student/" method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col s4 card-panel blue lighten-4 z-depth-3">
+                <h4>Send a Message</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s4">
+                {{ form.recipient }}
+                <label for="{{ form.recipient.id_for_label }}">To (email)</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s4">
+                {{ form.subject }}
+                <label for="{{ form.subject.id_for_label }}">Subject</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s4">
+                {{ form.text }}
+                <label for="{{ form.text.id_for_label }}">Message Text</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s4">
+                <button class="btn waves-effect waves-light" type="submit">Send Message</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock content %}

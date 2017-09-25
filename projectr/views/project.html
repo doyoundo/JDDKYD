@@ -1,0 +1,96 @@
+<!-- Individual project page -->
+{% extends "base.html" %}
+{% block content %}
+
+<!-- Display information about the project -->
+<div class="row">
+  <div class="col s4">
+    <h4 class="card-panel blue lighten-4 z-depth-2">{{ project.name }}</h4>
+    <h5>Description</h5>
+    <p>{{ project.description }}</p>
+    <h5>Requirements</h5>
+    <p>{{ project.requirements }}</p>
+    <h5>Keywords</h5>
+    <p>{{ project.keywords }}</p>
+    <h5>Client Email</h5>
+    <p>{{ project.client.email }}</p>
+  </div>
+</div>
+
+<!-- Questions for this project -->
+<div class="row">
+    <div class="col s8">
+        <h4 class="card-panel blue lighten-4 z-depth-2">Questions:</h4>
+        {% for question in questions %}
+            <li class="collection-item">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content avatar white-text">
+                        <i class="material-icons">error</i>
+                        <span class="card-title"><b>From:</b> {{ question.asker.email }}</span>
+                        <p> {{ question.text }} </p>
+                        {% if question.reply != "" %}
+                            <p><b>Reply:</bd> {{ question.reply }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+<!-- Submit a Question -->
+<div class="row">
+    <form class="col s4" action="/askquestion/{{ project.id }}" method="post">
+        <h4 class="card-panel blue lighten-4 z-depth-2">Ask a Question</h4>
+        {% csrf_token %}
+        <div class="row">
+            <div class="input-field">
+                {{ question_form.question }}
+                <label for="{{ question_form.question.id_for_label }}">Question Text</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field">
+                <button class="btn waves-effect waves-light" type="submit">Submit Question</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<!-- Form for students to submit a bid -->
+<div class="row">
+    <form class="col s4" action="/project/{{ project.id }}" method="post">
+        <h5 class="card-panel blue lighten-4 z-depth-2">Bid Submission Form</h5>
+        {% csrf_token %}
+        <div class="row">
+            <div class="input-field">
+                {{ form.team_members }}
+                <label for="{{ form.team_members.id_for_label }}">Team Member Names</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field">
+                {{ form.description }}
+                <label for="{{ form.description.id_for_label }}">Note to Client/Instructor</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field">
+                <button class="btn waves-effect waves-light" type="submit">Submit Bid</button>
+            </div>
+        </div>
+    </form>
+    {% if bid_success %}
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                alert("Bid successfully submitted!");
+            });
+        </script>
+    {% endif %}
+</div>
+
+
+{% endblock content %}

@@ -1,0 +1,27 @@
+<!-- Page where instructors / students can create / join class sections -->
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row">
+    {% if user.profile.user_type == 'I' %}
+		<div class="col s4"></div>
+        <!-- Allow to register a new section if an instructor -->
+        <form class="col s4" action="/editsection/{{ section_id }}/" method="post">
+            <h4 class="row card-panel blue lighten-4 z-depth-3">Rename Section</h4>
+            {% csrf_token %}
+            <div class="row">
+                <div class="input-field col s12">
+                    {{ form.name }}
+                    <label for="{{ form.name.id_for_label }}">New Section Name</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s4">
+                    <button class="btn waves-effect waves-light" type="submit">Rename</button>
+                </div>
+            </div>
+        </form>
+    {% endif %}
+</div>
+
+{% endblock content %}

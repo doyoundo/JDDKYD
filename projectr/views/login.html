@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row">
+    <div class="col s6">
+        <h2>Login:</h2>
+    </div>
+</div>
+
+<div class="row">
+    <form class="col s12" action="/login/" method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="input-field col s4">
+                {{ form.email }}
+                <label for="{{ form.email.id_for_label }}">Email</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s4">
+                {{ form.password }}
+                <label for="{{ form.password.id_for_label }}">Password</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s4">
+                <button class="btn waves-effect waves-light" type="submit">Login</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% if invalid %}
+<div class="card red darken-1">
+    <div class="card-content avatar white-text">
+        <i class="material-icons">error</i>
+                <span class="card-title">Invalid Login Credentials</span>
+    </div>
+</div>
+{% endif %}
+
+{% endblock content %}

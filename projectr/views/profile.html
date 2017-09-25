@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h2> Profile </h2>
+<h4>  Tags so far </h4>
+
+<h4>  Add Tags </h4>
+
+<form class="col s12" action="/profile/" method="post">
+  {% csrf_token %}
+  <div class="row">
+    <div class="input-field col s4">
+        {{ form.tags }}
+        <label for="{{ form.tags.id_for_label }}">Tags</label>
+    </div>
+  </div>
+</form>
+{% endblock content %}

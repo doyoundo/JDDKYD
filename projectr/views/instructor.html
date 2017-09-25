@@ -1,0 +1,113 @@
+<!-- Instructor home page -->
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row">
+
+    <!-- Notifications panel -->
+    <div class="col s4">
+        <ul class="collection with-header z-depth-3">
+            <li class="collection-header blue lighten-4"><h4>Notifications</h4></li>
+            {% for notification in notifications %}
+                <li class="collection-item">
+                    <div class="card blue-grey darken-1">
+                        <div class="card-content avatar white-text">
+                            <i class="material-icons">error</i>
+                            <span class="card-title">{{ notification.subject }}</span>
+                            <p>{{ notification.text }} </p>
+                        </div>
+                    </div>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Inbox panel -->
+    <div class="col s4">
+        <ul class="collection with-header z-depth-3">
+            <li class="collection-header blue lighten-4"><h4>Inbox</h4></li>
+            {% for message in inbox %}
+                <li class="collection-item">
+                    <div class="card blue-grey darken-1">
+                        <div class="card-content avatar white-text">
+                            <i class="material-icons">email</i>
+                            <span class="card-title">{{ message.subject }}</span>
+                            <p> {{ message.body }} </p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#">Reply</a>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        <a href="/messages/"><button class="btn waves-effect waves-light">View All Messages</button></a>
+        <a href="/sendmessage/"><button class="btn waves-effect waves-light">Send Message</button></a>
+    </div>
+
+    <!-- Outstanding bids from students go here -->
+    <div class="col s4">
+        <ul class="collection with-header z-depth-3">
+            <li class="collection-header blue lighten-4"><h4>Project Bids</h4></li>
+            {% for bid in bids %}
+                <li class="collection-item">
+                    <div class="card blue-grey darken-1">
+                        <div class="card-content avatar white-text">
+                            <i class="material-icons">assignment</i>
+                            <span class="card-title">{{ bid.project.name }}</span>
+                            <p><b>Biddees:</b> {{ bid.team_members }}</p>
+                            <br />
+                            <p><b>Bid Description:</b> {{ bid.description }}</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="/awardbid/{{ bid.id }}">Award Bid</a>
+                        </div>
+                        <div class="card-action">
+                            <a href="/rejectbid/{{ bid.id }}">Reject Bid</a>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Projects submitted by clients that have yet to be approved -->
+    <div class="col s4">
+        <ul class="collection with-header z-depth-3">
+            <li class="collection-header blue lighten-4"><h4>Projects To Approve</h4></li>
+            {% for project in projects_to_approve %}
+                <li class="collection-item">
+                    <div class="card blue-grey darken-1">
+                        <div class="card-content avatar white-text">
+                            <i class="material-icons">assignment</i>
+                            <span class="card-title">{{ project.name }}</span>
+                            <p><b>Client:</b> {{ project.client.name }}</p>
+                            <br />
+                            <p><b>Project Description:</b> {{ project.description }}</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="/approveproject/{{ project.id }}">Approve Project for Bidding</a>
+                        </div>
+                        <div class="card-action">
+                            <a href="/rejectproject/{{ project.id }}">Reject Project</a>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Or present a list of sections to join -->
+    <div class="col s4">
+        <h4 class="row card-panel blue lighten-4 z-depth-3">Manage Sections</h4>
+        <ul class="collection">
+            <li class="collection-item">
+                <a href="/managesection/" class="btn">Manage Sections</a>
+            </li>
+        </ul>
+    </div>
+
+</div>
+
+{% endblock content %}

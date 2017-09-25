@@ -1,0 +1,44 @@
+Steps Before coding:
+1. git reset --hard
+2. git branch "%NAME%Branch"
+3. git checkout "%NAME%Branch"
+
+Steps Before working on code - will delete all code in your local branch:
+1. git checkout master
+2. git pull --rebase
+3. git branch -D "%NAME%Branch"
+4. git branch "%NAME%Branch"
+5. git checkout "%NAME%Branch"
+6. Start Coding!
+
+Steps Before Pushing:
+1. git commit -a
+2. write a comment inside the txt file that pops up
+3. git checkout master
+4. git pull --rebase
+5. git merge "%NAME%Branch"
+6. RESOLVE MERGE CONFLICTS AND DO TESTING
+7. git status
+	your branch should be ahead by x commits, where x is the number of commits in the "%NAME%Branch" branch
+8. git push
+9. git checkout "%NAME%Branch"
+10. git merge master
+11. Fix Merge conflicts - should be none
+
+If you just want to update your local branch:
+1. git checkout master
+2. git pull --rebase
+3. git checkout "%NAME%Branch"
+4. git merge master
+5. Fix Merge conflicts and make sure everything works
+6. Start Coding!
+
+
+Rules:
+1 commit per feature
+TABS vs SPACES
+Max_line_length
+camelCase for variables, constants are all upper, functions are word1_word2 format
+Comment methods as the other team did.
+update the commit template with git config commit.template ~/absolute/path/to/commit_template.txt
+I suggest moving the template to home (~/commit_template.txt)
